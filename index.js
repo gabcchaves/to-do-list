@@ -1,14 +1,15 @@
 // Global variables
 const taskList = document.getElementById('taskList');
 const insertForm = document.getElementById('insertForm');
-const ajax = new XMLHttpRequest();
 var taskIds = []
 
 
 // Check backup
-ajax.open('GET', 'tasks.xml', true);
-ajax.send();
-
+$(document).ready(() => {
+	$.ajax({url: 'tasks.xml', success: (result) => {
+		$('#mainTitle').innerHTML = 'something';
+	}});
+});
 
 // Main page background
 $('#mainBg').css({
@@ -44,9 +45,13 @@ $('.textInput').focusout(() => {
 
 // Add task
 $('#addTask').on('click', () => {
-	var newTask = document.createElement('h1');
+	var newTask = document.createElement('label');
 	var newTaskName = document.getElementById('taskNameInput').value;
-	newTask.innerHTML = newTaskName;
+	newTask.setAttribute('class', 'ms-2 me-2');
+	newTask.innerHTML = `<input type="checkbox"> ${newTaskName}`;
 	taskList.insertBefore(newTask, insertForm);
+  $.ajax({url: "test.txt", success: function(result){
+    $("#addTask").html('hi');
+  }});
 });
 
